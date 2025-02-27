@@ -122,7 +122,7 @@ sudo /usr/local/bin/greenbone-feed-sync
 Automatycznie z cron:
 
 ```bash
-echo "0 5 * * * /usr/local/bin/greenbone-feed-sync" | sudo crontab -
+echo "0 5 * * * /usr/local/bin/greenbone-feed-sync" | sudo tee -a crontab
 ```
 
 Aktualizacja słowników trwa bardzo długo, do tego jest ograniczenie na pobieranie, ze strony Greenbone Community, więc jak się zablokuje, to trzeba poczekać. Po pobraniu słowników, usługi Greenbone indeksują zawartość, a to również może trwać długo, czasami dłużej niż pobieranie. Do tego warto zapewnić ok. 70GB wolnego miejsca, podczas pierwszej aktualizacji słowników.
