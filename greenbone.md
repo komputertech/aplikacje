@@ -3,9 +3,7 @@
 
 ## Instalacja
 
-Pobieramy listę najnowszych modułów, instrukcja często nie nadąża za aktualizacjami. Trzeba jednak pamiętać, że nie zawsze najnowsze moduły działają. Podczas kompilacji modułów trzeba uważnie sprawdzać informacje i doinstalować brakujące pakiety z APT, które nie są uwzględnione w instrukcji. Poniżej skrypty do pobrania wersji.
-
-Jeżeli aktualizujemy Ubuntu 22.04 LTS z Greenbone, to należy usunąć pakiet pyton3-impacket i dopiero wykonać do-release-upgrade.
+Pobieramy listę najnowszych modułów, instrukcja często nie nadąża za aktualizacjami. Trzeba jednak pamiętać, że nie zawsze najnowsze moduły działają. Podczas kompilacji modułów trzeba uważnie sprawdzać informacje i doinstalować brakujące pakiety, które czasami nie są uwzględnione w instrukcji. Poniżej skrypty do pobrania wersji.
 
 ### Powershell
 
@@ -57,18 +55,6 @@ for module in "${greenboneModules[@]}"; do
 done
 
 echo $openvasd
-```
-
-### Parametry systemu i bazy
-
-* Ubuntu 24.04 LTS
-* PostgreSQL 16
-
-### Instalacja Rust
-
-```bash
-sudo apt install rustup
-rustup default stable
 ```
 
 ## Usługa GSAD
@@ -136,9 +122,16 @@ sudo tail /var/log/gvm/gvmd.log
 
 ### Aktualizacja
 
-Podczas aktualizacji modułów trzeba je wcześniej usunąć. Cała procedura opisana jest [TUTAJ](https://greenbone.github.io/docs/latest/22.4/source-build/workflows.html). Jeśli z jakichś przyczyn zauważymy problemy z instalacją modułów, niestety trzeba ręcznie wyczyścić dany element. Np. przy problemie z ospd-openvas, problem ujawnia uruchomienie odinstalowania jako użytkownik, widać problem z usunięciem. Ręczne usunięcie naprawia sytuację.
+Podczas aktualizacji modułów trzeba je wcześniej usunąć. Cała procedura opisana jest [link do instrukcji](https://greenbone.github.io/docs/latest/22.4/source-build/workflows.html). Całość w skrócie to usunięcie wszystkich pakietów i zbudowanie ich od nowa, plus migracja bazy i słowników.
 
 ```bash
-python3 -m pip uninstall ospd-openvas --break-system-packages
-sudo rm -r /home/kuba/.local/lib/python3.12/site-packages/ospd*
+sudo systemctl stop gsad gvmd ospd-openvas openvasd
+sudo python3 -m pip uninstall --break-system-packages ospd-openvas greenbone-feed-sync gvm-tools
+```
+
+Teraz przechodzimy do instrukcji instalacji, zaraz po przygotowaniu użytkowników. Omijamy tworzenie bazy, schematów i usług. Kończymy instalację.
+
+```bash
+/usr/local/sbin/gvmd --migrate
+sudo systemctl start gsad gvmd ospd-openvas openvasd
 ```

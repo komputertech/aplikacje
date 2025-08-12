@@ -4,7 +4,7 @@ Całość oparta o Ubuntu 24.04 instalacja z pakietów apt. Przedstawiona konfig
 
 ## Instalacja
 
- Cała instrukcja znajduje się pod adresem: <https://privacyidea.readthedocs.io/en/stable/installation/ubuntu.html> skrócona wersja:
+Cała instrukcja znajduje się pod adresem: [link do instrukcji](https://privacyidea.readthedocs.io/en/stable/installation/ubuntu.html). Skrócona wersja:
 
 ```bash
 wget https://lancelot.netknights.it/NetKnights-Release.asc

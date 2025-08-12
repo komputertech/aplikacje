@@ -66,7 +66,7 @@ User=git
 Group=git
 WorkingDirectory=/var/lib/gitea/
 RuntimeDirectory=gitea
-ExecStart=/usr/bin/gitea web --config /etc/gitea/app.ini
+ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
 Restart=always
 
 [Install]
@@ -166,7 +166,7 @@ User=git
 Group=git
 WorkingDirectory=/var/lib/gitea/
 RuntimeDirectory=gitea
-ExecStart=/usr/bin/gitea web --config /etc/gitea/app.ini
+ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
 Restart=always
 Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
 CapabilityBoundingSet=CAP_NET_BIND_SERVICE
@@ -176,3 +176,7 @@ PrivateUsers=true
 [Install]
 WantedBy=multi-user.target
 ```
+
+## Aktualizacja
+
+Aktualizację najprościej przeprowadzić poprzez gotowy skrypt: [link do instrukcji](https://github.com/go-gitea/gitea/blob/release/v1.24/contrib/upgrade.sh)
