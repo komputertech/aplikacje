@@ -1,4 +1,3 @@
-
 # Greenbone
 
 ## Instalacja
